@@ -1,7 +1,7 @@
 export function Marquee() {
   return (
     <div
-      className="marquee text-black font-light text-3xl "
+      className="marquee text-black font-light text-xl md:text-3xl"
       aria-label="Technology skills carousel"
     >
       <ul className="marquee__content" role="list">

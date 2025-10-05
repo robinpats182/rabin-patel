@@ -1,22 +1,27 @@
-import { Hero } from "@/components/hero";
-import { Marquee } from "@/components/marque";
-import { Skills } from "@/components/skills";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import { Hero } from "@/components/hero"
+import { Skills } from "@/components/skills"
+import { Experience } from "@/components/experience"
+import { Projects } from "@/components/projects"
+import { ThemeProvider } from "@/components/theme-provider"
+import { Navigation } from "@/components/navbar"
+import { Marquee } from "@/components/marque"
+import { Footer } from "@/components/footer"
+
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col">
-      <div className="container mx-auto md:px-28 px-4">
-        <Hero />
+    <ThemeProvider>
+      <div className="min-h-screen">
+        <Navigation />
+        <main className="flex flex-col items-center justify-center">
+          <Hero />
         <Marquee />
-        <Skills />
-
-        {/* Footer */}
-        <footer className="py-6 text-gray-500">
-          © {new Date().getFullYear()} Portfolio . All rights reserved.
-        </footer>
+          <Skills />
+          <Experience />
+          <Projects />
+          <Footer />
+        </main>
       </div>
-    </main>
+    </ThemeProvider>
   );
 }
