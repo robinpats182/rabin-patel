@@ -1,6 +1,6 @@
 "use client"
 
-import { useFadeIn } from "@/hooks/use-fade-in"
+import ScrollFadeIn  from "@/hooks/use-fade-in"
 import { Code2, Database, Brain, Rocket, Server, Braces, Cpu, Zap } from "lucide-react"
 import { Card } from "@/components/ui/card"
 
@@ -48,27 +48,31 @@ const skills = [
 ]
 
 export function Skills() {
-  const fadeIn = useFadeIn(0.2)
+  const fadeIn = ScrollFadeIn();
 
   return (
     <section id="skills" className="min-h-screen flex items-center py-20 px-6">
       <div className="container mx-auto max-w-6xl">
         <div className="space-y-12">
-          <div className="space-y-4 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <div ref={fadeIn.ref} className={`space-y-4 text-center transition-all duration-2000 ${
+                 fadeIn.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                }`}>
             <h2 className="text-4xl md:text-5xl font-bold text-balance">Skills & Expertise</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
               A comprehensive toolkit for building modern web applications
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div 
+          ref={fadeIn.ref} 
+          className={`grid sm:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-2000 ${
+                  fadeIn.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+          >
             {skills.map((skill, index) => (
               <Card
-              ref={fadeIn.ref}
+              
                 key={skill.name}
-                className={`p-6 space-y-4 hover:border-primary/50 transition-all duration-500 hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-2 hover:rotate-1 animate-in fade-in slide-in-from-bottom-4 duration-700 group cursor-pointer ${
-                  fadeIn.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                }`}
-                style={{ animationDelay: `${index * 50}ms`, transitionDelay: `${index * 100}ms` }}
+                className={`p-6 space-y-4 hover:border-primary/50 transition-all duration-700 hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-2 hover:rotate-1 cursor-pointer 
+                `}
               >
                 <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center transition-all duration-500 group-hover:bg-primary/20 group-hover:scale-110 group-hover:rotate-12">
                   <skill.icon className="h-6 w-6 text-primary transition-all duration-500 group-hover:scale-125" />

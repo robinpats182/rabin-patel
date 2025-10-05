@@ -4,8 +4,8 @@ import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ExternalLink, Github } from "lucide-react"
-import { useFadeIn } from "@/hooks/use-fade-in"
 import Link from "next/link"
+import ScrollFadeIn from "@/hooks/use-fade-in"
 
 const projects = [
   {
@@ -37,13 +37,14 @@ const projects = [
 ]
 
 function ProjectCard({ project, index }: { project: (typeof projects)[0]; index: number }) {
-  const fadeIn = useFadeIn(0.1)
+  const { ref, visible } = ScrollFadeIn();
+
 
   return (
     <Card
-      ref={fadeIn.ref}
+      ref={ref}
       className={`overflow-hidden group pt-0 hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-3 ${
-        fadeIn.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
       style={{ transitionDelay: `${index * 200}ms` }}
     >
@@ -98,7 +99,7 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
 }
 
 export function Projects() {
-  const headerFadeIn = useFadeIn(0.2)
+  const headerFadeIn = ScrollFadeIn();
 
   return (
     <section id="projects" className="min-h-screen flex items-center py-20 px-6">
@@ -107,7 +108,7 @@ export function Projects() {
           <div
             ref={headerFadeIn.ref}
             className={`space-y-4 text-center transition-all duration-700 ${
-              headerFadeIn.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              headerFadeIn.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
             <h2 className="text-4xl md:text-5xl font-bold text-balance">Featured Projects</h2>
